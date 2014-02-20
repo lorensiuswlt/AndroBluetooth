@@ -131,6 +131,17 @@ public class MainActivity extends Activity {
 	}
 	
 	@Override
+	public void onPause() {
+		if (mBluetoothAdapter != null) {
+			if (mBluetoothAdapter.isDiscovering()) {
+				mBluetoothAdapter.cancelDiscovery();
+			}
+		}
+		
+		super.onPause();
+	}
+	
+	@Override
 	public void onDestroy() {
 		unregisterReceiver(mReceiver);
 		
